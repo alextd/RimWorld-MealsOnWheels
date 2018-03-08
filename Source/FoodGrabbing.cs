@@ -13,9 +13,9 @@ namespace Meals_On_Wheels
 	[HarmonyPatch("TryFindBestFoodSourceFor")]
 	class FoodGrabbing
 	{
+		[HarmonyPriority(Priority.Low)]
 		public static void Postfix(ref bool __result, Pawn getter, Pawn eater, ref Thing foodSource, ref ThingDef foodDef, bool canUseInventory = true)
 		{
-
 			if (__result == false && canUseInventory &&
 				getter.RaceProps.ToolUser && getter.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation))
 			{
