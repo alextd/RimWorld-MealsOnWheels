@@ -51,51 +51,50 @@ namespace Meals_On_Wheels
 	}
 
 
-	[HarmonyPatch(typeof(JobDriver_Ingest))]
-	[HarmonyPatch("TryMakePreToilReservations")]
-	static class Ingest_TryMakePreToilReservations_Patch
+
+	static class Food_TryMakePreToilReservations_Patch
 	{
-		public static bool Prefix(JobDriver_Ingest __instance, ref bool __result)
+		public static bool Prefix(JobDriver __instance, ref bool __result)
 		{
 			Job job = __instance.job;
-			Pawn eater = __instance.pawn;
+			Pawn getter = __instance.pawn;
 			Thing ingestibleSource = job.targetA.Thing;
-
-			Log.Message(eater + " TryMakePreToilReservations " + ingestibleSource);
+			Log.Message(getter + " TryMakePreToilReservations for job " + job + " with food " + ingestibleSource);
 
 			if (ingestibleSource == null || ingestibleSource.holdingOwner == null) return true;
 
 			//job.count is not set properly so here we go again:
-			int dropCount = FoodUtility.WillIngestStackCountOf(eater, ingestibleSource.def);
+			int dropCount = FoodUtility.WillIngestStackCountOf(getter, ingestibleSource.def);
+			dropCount = Math.Min(dropCount, ingestibleSource.stackCount);
 			Thing droppedFood = null;
 			if (ingestibleSource.holdingOwner.Owner is Pawn_InventoryTracker holder)
 			{
+				if (holder.pawn == getter) return true;
 				Log.Message(holder.pawn + " dropping " + ingestibleSource);
 				holder.innerContainer.TryDrop(ingestibleSource, ThingPlaceMode.Direct, dropCount, out droppedFood);
 			}
 			else if (ingestibleSource.holdingOwner.Owner is Pawn_CarryTracker carrier)
 			{
+				if (carrier.pawn == getter) return true;
 				Log.Message(carrier.pawn + " dropping " + ingestibleSource);
 				carrier.innerContainer.TryDrop(ingestibleSource, ThingPlaceMode.Direct, dropCount, out droppedFood);
 			}
 			else return true;
 
-			Log.Message(eater + " now eating with " + droppedFood);
+			Log.Message(getter + " now getting " + droppedFood);
 			job.targetA = droppedFood;
-			if (droppedFood.IsForbidden(eater))
+			if (droppedFood.IsForbidden(getter))
 			{
 				Log.Message(droppedFood + " is Forbidden, job will restart");
 				//Whoops dropped onto forbidden / reserved stack
 				__result = true;  //Job will fail on forbidden naturally
 				return false;
 			}
-			if (!eater.CanReserve(droppedFood))
+			if (!getter.CanReserve(droppedFood))
 			{
-				Verse.Log.Warning("Food " + droppedFood + " for " + eater + " was dropped onto a reserved stack. Job will fail and try again, so ignore the error please.");
+				Verse.Log.Warning("Food " + droppedFood + " for " + getter + " was dropped onto a reserved stack. Job will fail and try again, so ignore the error please.");
 			}
 			return true;
 		}
 	}
-
-
 }
