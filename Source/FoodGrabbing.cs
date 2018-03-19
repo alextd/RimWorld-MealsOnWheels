@@ -81,6 +81,8 @@ namespace Meals_On_Wheels
 			}
 			else return true;
 
+			if (droppedFood == null) return true;	//I don't think this should happen but if it does this won't work
+
 			Log.Message(getter + " now getting " + droppedFood);
 			job.targetA = droppedFood;
 			if (droppedFood.IsForbidden(getter))
