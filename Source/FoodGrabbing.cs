@@ -16,7 +16,7 @@ namespace Meals_On_Wheels
 		[HarmonyPriority(Priority.Low)]
 		public static void Postfix(ref bool __result, Pawn getter, Pawn eater, ref Thing foodSource, ref ThingDef foodDef, bool canUseInventory = true)
 		{
-			if (__result == false && canUseInventory &&
+			if (eater.IsFreeColonist && __result == false && canUseInventory &&
 				getter.RaceProps.ToolUser && getter.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation))
 			{
 				Log.Message("There be no food for " + eater);
