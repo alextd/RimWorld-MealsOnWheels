@@ -36,7 +36,7 @@ namespace Meals_On_Wheels
 
 		//public override string SettingsCategory()
 		//{
-		//	return "MealsOnWheels".Translate();
+		//	return "TD.MealsOnWheels".Translate();
 		//}
 	}
 }
