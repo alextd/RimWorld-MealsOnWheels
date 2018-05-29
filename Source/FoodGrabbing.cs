@@ -64,6 +64,9 @@ namespace Meals_On_Wheels
 			if (ingestibleSource == null || ingestibleSource.holdingOwner == null) return true;
 			if (getter.Faction == null || ingestibleSource is Building_NutrientPasteDispenser) return true;
 
+			//Well apparently inventory items can be forbidden
+			ingestibleSource.SetForbidden(false);
+
 			//job.count is not set properly so here we go again:
 			int dropCount = FoodUtility.WillIngestStackCountOf(getter, ingestibleSource.def);
 			dropCount = Math.Min(dropCount, ingestibleSource.stackCount);
