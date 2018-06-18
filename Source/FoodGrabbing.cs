@@ -68,7 +68,8 @@ namespace Meals_On_Wheels
 			ingestibleSource.SetForbidden(false, false);
 
 			//job.count is not set properly so here we go again:
-			int dropCount = FoodUtility.WillIngestStackCountOf(getter, ingestibleSource.def);
+			float nutrition = FoodUtility.GetNutrition(ingestibleSource, ingestibleSource.def);
+			int dropCount = FoodUtility.WillIngestStackCountOf(getter, ingestibleSource.def, nutrition);
 			dropCount = Math.Min(dropCount, ingestibleSource.stackCount);
 			Thing droppedFood = null;
 			if (ingestibleSource.holdingOwner.Owner is Pawn_InventoryTracker holder)
