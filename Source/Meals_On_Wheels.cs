@@ -16,7 +16,7 @@ namespace Meals_On_Wheels
 			HarmonyInstance.DEBUG = true;
 #endif
 			HarmonyInstance harmony = HarmonyInstance.Create("uuugggg.rimworld.Meals_On_Wheels.main");
-			harmony.PatchAll(Assembly.GetExecutingAssembly());
+			harmony.PatchAll();
 		}
 
 		//public override void DoSettingsWindowContents(Rect inRect)
