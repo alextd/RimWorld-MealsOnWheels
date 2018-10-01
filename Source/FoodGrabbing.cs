@@ -19,16 +19,16 @@ namespace Meals_On_Wheels
 			if (eater.IsFreeColonist && __result == false && canUseInventory &&
 				getter.RaceProps.ToolUser && getter.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation))
 			{
-				Log.Message("There be no food for " + eater);
+				Log.Message($"There be no food for " + eater);
 				List<Pawn> pawns = eater.Map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer).FindAll(p => p != getter);
 				foreach (Pawn p in pawns)
 				{
-					Log.Message("Food soon rotten on " + p + "?");
+					Log.Message($"Food soon rotten on " + p + "?");
 					Thing thing = FoodUtility.BestFoodInInventory(p, eater, FoodPreferability.MealAwful);
 					if (thing != null && thing.TryGetComp<CompRottable>() is CompRottable compRottable &&
 						compRottable != null && compRottable.Stage == RotStage.Fresh && compRottable.TicksUntilRotAtCurrentTemp < GenDate.TicksPerDay / 2)
 					{
-						Log.Message("Food is " + thing);
+						Log.Message($"Food is " + thing);
 						foodSource = thing;
 						foodDef = FoodUtility.GetFinalIngestibleDef(foodSource, false);
 						__result = true;
@@ -37,11 +37,11 @@ namespace Meals_On_Wheels
 				}
 				foreach (Pawn p in pawns)
 				{
-					Log.Message("Food on " + p + "?");
+					Log.Message($"Food on " + p + "?");
 					Thing thing = FoodUtility.BestFoodInInventory(p, eater, FoodPreferability.DesperateOnly, FoodPreferability.MealLavish, 0f, !eater.IsTeetotaler());
 					if (thing != null)
 					{
-						Log.Message("Food is " + thing);
+						Log.Message($"Food is " + thing);
 						foodSource = thing;
 						foodDef = FoodUtility.GetFinalIngestibleDef(foodSource, false);
 						__result = true;
@@ -117,7 +117,7 @@ namespace Meals_On_Wheels
 			}
 			if (!getter.CanReserve(droppedFood))
 			{
-				Verse.Log.Warning("Food " + droppedFood + " for " + getter + " was dropped onto a reserved stack. Job will fail and try again, so ignore the error please.");
+				Verse.Log.Warning($"Food " + droppedFood + " for " + getter + " was dropped onto a reserved stack. Job will fail and try again, so ignore the error please.");
 			}
 			return true;
 		}
