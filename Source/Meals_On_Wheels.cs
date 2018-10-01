@@ -17,15 +17,6 @@ namespace Meals_On_Wheels
 #endif
 			HarmonyInstance harmony = HarmonyInstance.Create("uuugggg.rimworld.Meals_On_Wheels.main");
 			harmony.PatchAll(Assembly.GetExecutingAssembly());
-
-
-			harmony.Patch(AccessTools.Method(typeof(JobDriver_FoodFeedPatient), "TryMakePreToilReservations"),
-				new HarmonyMethod(typeof(Food_TryMakePreToilReservations_Patch), "Prefix"), null);
-			harmony.Patch(AccessTools.Method(typeof(JobDriver_Ingest), "TryMakePreToilReservations"),
-				new HarmonyMethod(typeof(Food_TryMakePreToilReservations_Patch), "Prefix"), null);
-			harmony.Patch(AccessTools.Method(typeof(JobDriver_FoodDeliver), "TryMakePreToilReservations"),
-				new HarmonyMethod(typeof(Food_TryMakePreToilReservations_Patch), "Prefix"), null);
-
 		}
 
 		//public override void DoSettingsWindowContents(Rect inRect)

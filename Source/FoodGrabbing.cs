@@ -53,7 +53,23 @@ namespace Meals_On_Wheels
 	}
 
 
-
+	[HarmonyPatch(typeof(JobDriver_FoodFeedPatient), "TryMakePreToilReservations")]
+	static class Food_TryMakePreToilReservations_Patch3
+	{
+		public static bool Prefix(JobDriver __instance, ref bool __result)
+		{
+			return Food_TryMakePreToilReservations_Patch.Prefix(__instance, ref __result);
+		}
+	}
+	[HarmonyPatch(typeof(JobDriver_Ingest), "TryMakePreToilReservations")]
+	static class Food_TryMakePreToilReservations_Patch2
+	{
+		public static bool Prefix(JobDriver __instance, ref bool __result)
+		{
+			return Food_TryMakePreToilReservations_Patch.Prefix(__instance, ref __result);
+		}
+	}
+	[HarmonyPatch(typeof(JobDriver_FoodDeliver), "TryMakePreToilReservations")]
 	static class Food_TryMakePreToilReservations_Patch
 	{
 		public static bool Prefix(JobDriver __instance, ref bool __result)
