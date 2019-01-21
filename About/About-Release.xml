@@ -2,7 +2,9 @@
 <ModMetaData>
 	<name>Meals On Wheels</name>
 	<author>Uuugggg</author>
-	<targetVersion>1.0.0</targetVersion>
+	<supportedVersions>
+		<li>1.0.0</li>
+	</supportedVersions>
 	<description>Colonists grab meals from animals or each other, if needed.
 
 Check Steam page for any updated info.</description>
