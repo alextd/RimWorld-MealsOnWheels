@@ -76,6 +76,9 @@ namespace Meals_On_Wheels
 		{
 			Job job = __instance.job;
 			Pawn getter = __instance.pawn;
+
+			if (!getter.IsFreeColonist) return true;
+
 			Thing ingestibleSource = job.targetA.Thing;
 			Log.Message(getter + " TryMakePreToilReservations for job " + job + " with food " + ingestibleSource);
 
