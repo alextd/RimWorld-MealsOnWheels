@@ -20,7 +20,10 @@ namespace Meals_On_Wheels
 				getter.RaceProps.ToolUser && getter.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation))
 			{
 				Log.Message($"There be no food for " + eater);
-				List<Pawn> pawns = eater.Map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer).FindAll(p => p != getter);
+				List<Pawn> pawns = eater.Map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer).FindAll(
+					p => p != getter &&
+					getter.CanReach(p, PathEndMode.OnCell, Danger.Some)
+				);
 				foreach (Pawn p in pawns)
 				{
 					Log.Message($"Food soon rotten on " + p + "?");
