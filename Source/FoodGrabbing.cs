@@ -22,6 +22,7 @@ namespace Meals_On_Wheels
 				Log.Message($"There be no food for " + eater);
 				List<Pawn> pawns = eater.Map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer).FindAll(
 					p => p != getter &&
+					!p.Position.IsForbidden(getter) && 
 					getter.CanReach(p, PathEndMode.OnCell, Danger.Some)
 				);
 				foreach (Pawn p in pawns)
