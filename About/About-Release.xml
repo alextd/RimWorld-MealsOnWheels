@@ -4,7 +4,9 @@
 	<author>Uuugggg</author>
 	<supportedVersions>
 		<li>1.0</li>
+		<li>1.1</li>
 	</supportedVersions>
+	<packageId>Uuugggg.MealsOnWheels</packageId>
 	<description>Colonists grab meals from animals or each other, if needed.
 
 Check Steam page for any updated info.</description>

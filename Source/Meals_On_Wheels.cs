@@ -2,7 +2,7 @@
 using System.Linq;
 using Verse;
 using UnityEngine;
-using Harmony;
+using HarmonyLib;
 using RimWorld;
 
 namespace Meals_On_Wheels
@@ -14,9 +14,9 @@ namespace Meals_On_Wheels
 			// initialize settings
 			//GetSettings<Settings>();
 #if DEBUG
-			HarmonyInstance.DEBUG = true;
+			Harmony.DEBUG = true;
 #endif
-			HarmonyInstance harmony = HarmonyInstance.Create("uuugggg.rimworld.Meals_On_Wheels.main");
+			Harmony harmony = new Harmony("uuugggg.rimworld.Meals_On_Wheels.main");
 
 			//Turn off DefOf warning since harmony patches trigger it.
 			MethodInfo DefOfHelperInfo = AccessTools.Method(typeof(DefOfHelper), "EnsureInitializedInCtor");
