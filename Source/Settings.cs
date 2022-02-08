@@ -6,14 +6,10 @@ using RimWorld;
 
 namespace Meals_On_Wheels
 {
-	class Settings : ModSettings
+	public class Settings : ModSettings
 	{
 		public bool setting;
 
-		public static Settings Get()
-		{
-			return LoadedModManager.GetMod<Meals_On_Wheels.Mod>().GetSettings<Settings>();
-		}
 
 		public void DoWindowContents(Rect wrect)
 		{
