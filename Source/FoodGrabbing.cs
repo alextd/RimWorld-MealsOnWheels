@@ -9,7 +9,7 @@ using Verse.AI;
 
 namespace Meals_On_Wheels
 {
-	[HarmonyPatch(typeof(FoodUtility),nameof(FoodUtility.TryFindBestFoodSourceFor_NewTemp))]
+	[HarmonyPatch(typeof(FoodUtility),nameof(FoodUtility.TryFindBestFoodSourceFor))]
 	class FoodGrabbing
 	{
 		//public static bool TryFindBestFoodSourceFor(Pawn getter, Pawn eater, bool desperate, out Thing foodSource, out ThingDef foodDef, bool canRefillDispenser = true, bool canUseInventory = true, bool canUsePackAnimalInventory = false, bool allowForbidden = false, bool allowCorpse = true, bool allowSociallyImproper = false, bool allowHarvest = false, bool forceScanWholeMap = false, bool ignoreReservations = false, bool calculateWantedStackCount = false, FoodPreferability minPrefOverride = FoodPreferability.Undefined)
