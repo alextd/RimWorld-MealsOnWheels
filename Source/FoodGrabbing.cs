@@ -9,7 +9,7 @@ using Verse.AI;
 
 namespace Meals_On_Wheels
 {
-	[HarmonyPatch(typeof(FoodUtility),nameof(FoodUtility.TryFindBestFoodSourceFor))]
+	[HarmonyPatch(typeof(FoodUtility), nameof(FoodUtility.TryFindBestFoodSourceFor_NewTemp))]
 	class FoodGrabbing
 	{
 		//public static bool TryFindBestFoodSourceFor(Pawn getter, Pawn eater, bool desperate, out Thing foodSource, out ThingDef foodDef, bool canRefillDispenser = true, bool canUseInventory = true, bool canUsePackAnimalInventory = false, bool allowForbidden = false, bool allowCorpse = true, bool allowSociallyImproper = false, bool allowHarvest = false, bool forceScanWholeMap = false, bool ignoreReservations = false, bool calculateWantedStackCount = false, FoodPreferability minPrefOverride = FoodPreferability.Undefined)
@@ -28,7 +28,7 @@ namespace Meals_On_Wheels
 				foreach (Pawn p in pawns)
 				{
 					Log.Message($"Food soon rotten on " + p + "?");
-					Thing thing = FoodUtility.BestFoodInInventory(p, eater, FoodPreferability.MealAwful);
+					Thing thing = FoodUtility.BestFoodInInventory_NewTemp(p, eater, FoodPreferability.MealAwful);
 					if (thing != null && thing.TryGetComp<CompRottable>() is CompRottable compRottable &&
 						compRottable != null && compRottable.Stage == RotStage.Fresh && compRottable.TicksUntilRotAtCurrentTemp < GenDate.TicksPerDay / 2)
 					{
@@ -42,7 +42,7 @@ namespace Meals_On_Wheels
 				foreach (Pawn p in pawns)
 				{
 					Log.Message($"Food on " + p + "?");
-					Thing thing = FoodUtility.BestFoodInInventory(p, eater, FoodPreferability.DesperateOnly, FoodPreferability.MealLavish, 0f, !eater.IsTeetotaler());
+					Thing thing = FoodUtility.BestFoodInInventory_NewTemp(p, eater, FoodPreferability.DesperateOnly, FoodPreferability.MealLavish, 0f, !eater.IsTeetotaler());
 					if (thing != null)
 					{
 						Log.Message($"Food is " + thing);
